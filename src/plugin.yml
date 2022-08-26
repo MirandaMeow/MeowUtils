@@ -1,0 +1,23 @@
+name: MeowUtils
+main: fun.miranda.MeowUtils
+version: 1.0.0
+author: Miranda
+description: 猫子组件
+softdepend: [ ]
+load: POSTWORLD
+api-version: 1.19
+
+commands:
+  sealscroll:
+    description: 给玩家封印卷轴
+    usage: /sealscroll <player> <amount>
+    permission: sealscroll.give
+    permission-message: §c你没有权限
+  imprint:
+    description: 给玩家烙印卷轴
+    usage: /imprint <player> <amount>
+    permission: imprint.give
+    permission-message: §c你没有权限
+  imprintsign:
+    description: 给烙印卷轴签名
+    usage: /imprintsign <sign>
