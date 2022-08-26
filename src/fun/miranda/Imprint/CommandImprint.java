@@ -1,6 +1,5 @@
 package fun.miranda.Imprint;
 
-import fun.miranda.Imprint.Scroll;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -30,7 +29,7 @@ public class CommandImprint implements TabExecutor {
             sender.sendMessage("§c数量不正确");
             return true;
         }
-        int miss = Scroll.giveScroll(player, Integer.parseInt(amount));
+        int miss = ImprintScroll.giveScroll(player, Integer.parseInt(amount));
         if (miss == 0) {
             sender.sendMessage(String.format("§e将 §b%s §e个§9§l烙印卷轴§r§e给 §b%s", amount, playerName));
             player.sendMessage(String.format("§e收到了 §b%s §e个§9§l烙印卷轴§r", amount));

@@ -29,7 +29,7 @@ public class CommandSeal implements TabExecutor {
             sender.sendMessage("§c数量不正确");
             return true;
         }
-        int miss = Scroll.giveScroll(player, Integer.parseInt(amount));
+        int miss = SealScroll.giveScroll(player, Integer.parseInt(amount));
         if (miss == 0) {
             sender.sendMessage(String.format("§e将 §b%s §e个§9§l封印卷轴§r§e给 §b%s", amount, playerName));
             player.sendMessage(String.format("§e收到了 §b%s §e个§9§l封印卷轴§r", amount));

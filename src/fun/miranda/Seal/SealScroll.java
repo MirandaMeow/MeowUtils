@@ -14,21 +14,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Scroll {
+public class SealScroll {
     public ItemStack scroll;
     public boolean isSealed;
     private String seal;
     private EntityType type;
-    public static Scroll blankScroll = null;
+    public static SealScroll blankScroll = null;
 
     public static ItemStack getBlankScroll() {
         if (blankScroll == null) {
-            blankScroll = new Scroll();
+            blankScroll = new SealScroll();
         }
         return blankScroll.scroll;
     }
 
-    public Scroll() {
+    public SealScroll() {
         this.scroll = new ItemStack(Material.PAPER, 1);
         ItemMeta scrollMeta = this.scroll.getItemMeta();
         assert scrollMeta != null;
@@ -48,7 +48,7 @@ public class Scroll {
         this.type = null;
     }
 
-    public Scroll(ItemStack itemStack) {
+    public SealScroll(ItemStack itemStack) {
         this.scroll = itemStack;
         if (NBTEditor.contains(this.scroll, "seal")) {
             String seal = NBTEditor.getString(this.scroll, "seal");

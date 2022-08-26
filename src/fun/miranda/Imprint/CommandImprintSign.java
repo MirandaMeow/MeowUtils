@@ -1,6 +1,5 @@
 package fun.miranda.Imprint;
 
-import fun.miranda.Imprint.Scroll;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -17,7 +16,7 @@ public class CommandImprintSign implements TabExecutor {
             return true;
         }
         String sign = String.join(" ", args);
-        String result = Scroll.sign(player, sign);
+        String result = ImprintScroll.sign(player, sign);
         player.sendMessage(result);
         return true;
     }

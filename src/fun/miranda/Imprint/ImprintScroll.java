@@ -12,13 +12,13 @@ import java.util.Formatter;
 import java.util.HashMap;
 import java.util.List;
 
-public class Scroll {
-    public static Scroll blankScroll = null;
+public class ImprintScroll {
+    public static ImprintScroll blankScroll = null;
     public final ItemStack scroll;
     public boolean isImprinted;
     private Location location;
 
-    public Scroll(ItemStack itemStack) {
+    public ImprintScroll(ItemStack itemStack) {
         this.scroll = itemStack;
         ItemMeta scrollMeta = this.scroll.getItemMeta();
         assert scrollMeta != null;
@@ -39,7 +39,7 @@ public class Scroll {
         }
     }
 
-    public Scroll() {
+    public ImprintScroll() {
         this.scroll = new ItemStack(Material.PAPER, 1);
         ItemMeta scrollMeta = this.scroll.getItemMeta();
         assert scrollMeta != null;
@@ -150,7 +150,7 @@ public class Scroll {
     }
 
     public static int giveScroll(Player player, int amount) {
-        Scroll scroll = new Scroll();
+        ImprintScroll scroll = new ImprintScroll();
         ItemStack item = scroll.getScroll();
         item.setAmount(amount);
         HashMap<Integer, ItemStack> result = player.getInventory().addItem(item);
@@ -160,9 +160,9 @@ public class Scroll {
         return result.get(0).getAmount();
     }
 
-    public static Scroll getBlankScroll() {
+    public static ImprintScroll getBlankScroll() {
         if (blankScroll == null) {
-            blankScroll = new Scroll();
+            blankScroll = new ImprintScroll();
         }
         return blankScroll;
     }

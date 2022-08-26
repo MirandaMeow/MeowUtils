@@ -24,13 +24,13 @@ public class EventSeal implements Listener {
         if (!player.isSneaking()) {
             return;
         }
-        if (!Scroll.isSealScroll(handItem)) {
+        if (!SealScroll.isSealScroll(handItem)) {
             return;
         }
         if (!(event.getRightClicked() instanceof LivingEntity entity)) {
             return;
         }
-        Scroll scroll = new Scroll(handItem);
+        SealScroll scroll = new SealScroll(handItem);
         scroll.seal(entity, player);
     }
 
@@ -44,7 +44,7 @@ public class EventSeal implements Listener {
         }
         Player player = event.getPlayer();
         ItemStack handItem = player.getInventory().getItemInMainHand();
-        if (!Scroll.isSealScroll(handItem)) {
+        if (!SealScroll.isSealScroll(handItem)) {
             return;
         }
         if (player.isSneaking()) {
@@ -53,7 +53,7 @@ public class EventSeal implements Listener {
         if (!event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             return;
         }
-        Scroll scroll = new Scroll(handItem);
+        SealScroll scroll = new SealScroll(handItem);
         if (!scroll.isSealed) {
             return;
         }

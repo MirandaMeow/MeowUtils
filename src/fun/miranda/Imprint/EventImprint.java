@@ -31,10 +31,10 @@ public class EventImprint implements Listener {
         if (!player.isSneaking()) {
             return;
         }
-        if (!Scroll.isScroll(handItem)) {
+        if (!ImprintScroll.isScroll(handItem)) {
             return;
         }
-        Scroll scroll = new Scroll(handItem);
+        ImprintScroll scroll = new ImprintScroll(handItem);
         if (player.getInventory().firstEmpty() == -1) {
             player.sendMessage("§c背包里没有空位了");
             return;
@@ -52,7 +52,7 @@ public class EventImprint implements Listener {
         }
         Player player = event.getPlayer();
         ItemStack handItem = player.getInventory().getItemInMainHand();
-        if (!Scroll.isScroll(handItem)) {
+        if (!ImprintScroll.isScroll(handItem)) {
             return;
         }
         if (player.isSneaking()) {
@@ -61,7 +61,7 @@ public class EventImprint implements Listener {
         if (!event.getAction().equals(Action.RIGHT_CLICK_BLOCK) && !event.getAction().equals(Action.RIGHT_CLICK_AIR)) {
             return;
         }
-        Scroll scroll = new Scroll(handItem);
+        ImprintScroll scroll = new ImprintScroll(handItem);
         if (!scroll.isImprinted) {
             return;
         }
@@ -92,7 +92,7 @@ public class EventImprint implements Listener {
         }
         int chance = random.nextInt(100) + 1;
         if (chance == 10) {
-            entity.getWorld().dropItem(entity.getLocation(), Scroll.getBlankScroll().getScroll());
+            entity.getWorld().dropItem(entity.getLocation(), ImprintScroll.getBlankScroll().getScroll());
         }
     }
 }
