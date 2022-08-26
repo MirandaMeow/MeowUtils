@@ -79,9 +79,9 @@ public class SealScroll {
         NBTEditor.NBTCompound compound = NBTEditor.getEntityNBTTag(entity);
         this.seal = compound.toJson();
         this.scroll = NBTEditor.set(this.scroll, this.seal, "seal");
-        player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
         this.isSealed = true;
         this.type = entity.getType();
+        player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
         entity.remove();
         ItemMeta scrollMeta = this.scroll.getItemMeta();
         assert scrollMeta != null;
