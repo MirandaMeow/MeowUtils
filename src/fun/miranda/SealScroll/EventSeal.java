@@ -33,11 +33,19 @@ public class EventSeal implements Listener {
         if (!SealScroll.isSealScroll(handItem)) {
             return;
         }
+        SealScroll scroll = new SealScroll(handItem);
+        if (scroll.isSealed) {
+            player.sendMessage("§c卷轴已经封印了生物");
+            return;
+        }
         if (!(event.getRightClicked() instanceof LivingEntity entity)) {
             player.sendMessage("§c该实体不是活物");
             return;
         }
-        SealScroll scroll = new SealScroll(handItem);
+        if (entity instanceof Player) {
+            player.sendMessage("§c不能封印玩家");
+            return;
+        }
         scroll.seal(entity, player);
     }
 
