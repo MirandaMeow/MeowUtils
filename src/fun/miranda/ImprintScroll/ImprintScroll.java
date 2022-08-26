@@ -1,4 +1,4 @@
-package fun.miranda.Imprint;
+package fun.miranda.ImprintScroll;
 
 import org.bukkit.*;
 import org.bukkit.enchantments.Enchantment;
@@ -150,8 +150,7 @@ public class ImprintScroll {
     }
 
     public static int giveScroll(Player player, int amount) {
-        ImprintScroll scroll = new ImprintScroll();
-        ItemStack item = scroll.getScroll();
+        ItemStack item = getBlankScroll().clone();
         item.setAmount(amount);
         HashMap<Integer, ItemStack> result = player.getInventory().addItem(item);
         if (result.isEmpty()) {
@@ -160,10 +159,10 @@ public class ImprintScroll {
         return result.get(0).getAmount();
     }
 
-    public static ImprintScroll getBlankScroll() {
+    public static ItemStack getBlankScroll() {
         if (blankScroll == null) {
             blankScroll = new ImprintScroll();
         }
-        return blankScroll;
+        return blankScroll.scroll;
     }
 }

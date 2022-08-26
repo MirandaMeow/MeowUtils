@@ -1,4 +1,4 @@
-package fun.miranda.Seal;
+package fun.miranda.SealScroll;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;

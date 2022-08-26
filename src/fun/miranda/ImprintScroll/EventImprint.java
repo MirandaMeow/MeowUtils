@@ -1,4 +1,4 @@
-package fun.miranda.Imprint;
+package fun.miranda.ImprintScroll;
 
 import org.bukkit.entity.Damageable;
 import org.bukkit.entity.Player;
@@ -92,7 +92,7 @@ public class EventImprint implements Listener {
         }
         int chance = random.nextInt(100) + 1;
         if (chance == 10) {
-            entity.getWorld().dropItem(entity.getLocation(), ImprintScroll.getBlankScroll().getScroll());
+            entity.getWorld().dropItem(entity.getLocation(), ImprintScroll.getBlankScroll());
         }
     }
 }

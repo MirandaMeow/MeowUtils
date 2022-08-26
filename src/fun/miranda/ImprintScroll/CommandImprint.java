@@ -1,4 +1,4 @@
-package fun.miranda.Imprint;
+package fun.miranda.ImprintScroll;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;

@@ -1,7 +1,6 @@
-package fun.miranda.Seal;
+package fun.miranda.SealScroll;
 
 import fun.miranda.Utils.NBTEditor;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
@@ -102,18 +101,21 @@ public class SealScroll {
         player.updateInventory();
     }
 
-    public void unleash(Player player, Location location) {
+    public void unleash(Player player) {
         if (!this.isSealed) {
             return;
         }
         NBTEditor.NBTCompound compound = NBTEditor.NBTCompound.fromJson(this.seal);
         Entity entity = player.getWorld().spawnEntity(player.getLocation(), this.type);
         NBTEditor.set(entity, compound);
-        entity.teleport(location);
+        entity.teleport(player.getLocation());
         player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
     }
 
     public static boolean isSealScroll(ItemStack itemStack) {
+        if (itemStack.getType().equals(Material.AIR)) {
+            return false;
+        }
         ItemMeta itemMeta = itemStack.getItemMeta();
         assert itemMeta != null;
         return itemMeta.getDisplayName().equals("§9§l封印卷轴");

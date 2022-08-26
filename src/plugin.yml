@@ -11,13 +11,16 @@ commands:
   sealscroll:
     description: 给玩家封印卷轴
     usage: /sealscroll <player> <amount>
-    permission: sealscroll.give
+    permission: meowutils.sealscroll.give
     permission-message: §c你没有权限
   imprint:
     description: 给玩家烙印卷轴
     usage: /imprint <player> <amount>
-    permission: imprint.give
+    permission: meowutils.imprintscroll.give
     permission-message: §c你没有权限
   imprintsign:
     description: 给烙印卷轴签名
     usage: /imprintsign <sign>
+  cc:
+    description: 打开云箱子
+    usage: /cc

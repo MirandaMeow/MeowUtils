@@ -1,4 +1,4 @@
-package fun.miranda.Imprint;
+package fun.miranda.ImprintScroll;
 
 import fun.miranda.MeowUtils;
 import org.bukkit.Bukkit;
