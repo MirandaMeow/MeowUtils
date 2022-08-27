@@ -7,6 +7,7 @@ import fun.miranda.ImprintScroll.CommandImprintSign;
 import fun.miranda.ImprintScroll.EventImprint;
 import fun.miranda.SealScroll.CommandSeal;
 import fun.miranda.SealScroll.EventSeal;
+import fun.miranda.ShowWhoTamed.EventShowWhoTamed;
 import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabExecutor;
@@ -48,6 +49,7 @@ public class MeowUtils extends JavaPlugin {
         List<Listener> listeners = new ArrayList<>();
         listeners.add(new EventImprint());
         listeners.add(new EventSeal());
+        listeners.add(new EventShowWhoTamed());
         for (Listener listener : listeners) {
             registerEvent(listener);
         }
@@ -68,6 +70,7 @@ public class MeowUtils extends JavaPlugin {
         Bukkit.getConsoleSender().sendMessage("§b[§6猫子组件§b] §e  -- 烙印卷轴");
         Bukkit.getConsoleSender().sendMessage("§b[§6猫子组件§b] §e  -- 封印卷轴");
         Bukkit.getConsoleSender().sendMessage("§b[§6猫子组件§b] §e  -- 云箱子");
+        Bukkit.getConsoleSender().sendMessage("§b[§6猫子组件§b] §e  -- 驯兽提示");
     }
 
     /**
