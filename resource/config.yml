@@ -1,0 +1,9 @@
+modules:
+  cloudchest: true
+  rolldice: true
+  imprint: false
+  seal: false
+  teleport: false
+  showwhotamed: false
+players: []
+chest: ''

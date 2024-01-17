@@ -15,6 +15,7 @@ import fun.miranda.Teleport.CommandHome;
 import fun.miranda.Teleport.CommandSetHome;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -24,6 +25,7 @@ import java.util.logging.Logger;
 public class MeowUtils extends JavaPlugin {
     public static MeowUtils plugin;
     private Logger logger;
+    public FileConfiguration config;
 
     /**
      * 插件载入
@@ -31,7 +33,8 @@ public class MeowUtils extends JavaPlugin {
     @Override
     public void onLoad() {
         logger = this.getServer().getLogger();
-        updateConfig();
+        this.saveDefaultConfig();
+        this.config = this.getConfig();
     }
 
     /**
@@ -40,18 +43,30 @@ public class MeowUtils extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
-        if (this.getConfig().get("players") == null) {
-            this.getConfig().set("players", new ArrayList<>());
+        if (this.config.get("players") == null) {
+            this.config.set("players", new ArrayList<>());
         }
         logger.info("§b[§6猫子组件§b] §e正在启用");
         logger.info("§b[§6猫子组件§b] §e已载入功能：");
 
-        setupCloudChest();
-        setupRollDice();
-        setupImprint();
-        setupSeal();
-        setupTeleport();
-        setupShowWhoTamed();
+        if (getModuleEnabled("cloudchest")) {
+            setupCloudChest();
+        }
+        if (getModuleEnabled("rolldice")) {
+            setupRollDice();
+        }
+        if (getModuleEnabled("imprint")) {
+            setupImprint();
+        }
+        if (getModuleEnabled("seal")) {
+            setupSeal();
+        }
+        if (getModuleEnabled("teleport")) {
+            setupTeleport();
+        }
+        if (getModuleEnabled("showwhotamed")) {
+            setupShowWhoTamed();
+        }
     }
 
     /**
@@ -59,8 +74,12 @@ public class MeowUtils extends JavaPlugin {
      */
     public void onDisable() {
         logger.info("§b[§6猫子组件§b] §e正在禁用");
-        saveCloudChest();
-        saveTeleport();
+        if (getModuleEnabled("cloudchest")) {
+            saveCloudChest();
+        }
+        if (getModuleEnabled("teleport")) {
+            saveTeleport();
+        }
         this.saveConfig();
     }
 
@@ -88,8 +107,8 @@ public class MeowUtils extends JavaPlugin {
      */
     private void setupCloudChest() {
         registerCommand("cc", new CommandCloudChest());
-        if (this.getConfig().getString("chest") == null) {
-            this.getConfig().set("chest", "");
+        if (this.config.getString("chest") == null) {
+            this.config.set("chest", "");
         }
         logger.info("§b[§6猫子组件§b] §e  -- 云箱子");
     }
@@ -158,10 +177,7 @@ public class MeowUtils extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(listener, this);
     }
 
-    /**
-     * 生成默认配置文件
-     */
-    public void updateConfig() {
-        this.saveDefaultConfig();
+    private boolean getModuleEnabled(String moduleName) {
+        return this.config.getBoolean(String.format("modules.%s", moduleName));
     }
 }

@@ -33,12 +33,12 @@ public class CloudChest {
 
     public void save() {
         String contents = this.contentsToString(this.chestInv.getContents());
-        MeowUtils.plugin.getConfig().set("chest", contents);
+        MeowUtils.plugin.config.set("chest", contents);
     }
 
     private Inventory read() {
         Inventory chestInv = Bukkit.createInventory(null, 54, "§9云箱子");
-        String contents = MeowUtils.plugin.getConfig().getString("chest");
+        String contents = MeowUtils.plugin.config.getString("chest");
         assert contents != null;
         if (!contents.equals("")) {
             ItemStack[] itemStacks = this.stringToContents(contents);
