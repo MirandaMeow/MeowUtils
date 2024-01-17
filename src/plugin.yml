@@ -1,0 +1,38 @@
+name: MeowUtils
+main: fun.miranda.MeowUtils
+version: 1.0.0
+author: Miranda
+description: 猫子组件
+softdepend: [ ]
+load: POSTWORLD
+api-version: 1.20
+
+commands:
+  sealscroll:
+    description: 给玩家封印卷轴
+    usage: /sealscroll <player> <amount>
+    permission: meowutils.sealscroll.give
+    permission-message: §c你没有权限
+  imprint:
+    description: 给玩家烙印卷轴
+    usage: /imprint <player> <amount>
+    permission: meowutils.imprintscroll.give
+    permission-message: §c你没有权限
+  imprintsign:
+    description: 给烙印卷轴签名
+    usage: /imprintsign <sign>
+  cc:
+    description: 打开云箱子
+    usage: /cc
+  sethome:
+    description: 设置家
+    usage: /sethome <homeName>
+  delhome:
+    description: 删除家
+    usage: /delhome <homeName>
+  defhome:
+    description: 设置默认家
+    usage: /defhome <homeName>
+  home:
+    description: 回到指定家
+    usage: /home [homeName]

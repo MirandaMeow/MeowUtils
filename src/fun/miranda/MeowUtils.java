@@ -1,0 +1,167 @@
+package fun.miranda;
+
+import fun.miranda.CloudChest.CloudChest;
+import fun.miranda.CloudChest.CommandCloudChest;
+import fun.miranda.ImprintScroll.CommandImprint;
+import fun.miranda.ImprintScroll.CommandImprintSign;
+import fun.miranda.ImprintScroll.EventImprint;
+import fun.miranda.RollDice.EventRollDice;
+import fun.miranda.SealScroll.CommandSeal;
+import fun.miranda.SealScroll.EventSeal;
+import fun.miranda.ShowWhoTamed.EventShowWhoTamed;
+import fun.miranda.Teleport.CommandDefaultHome;
+import fun.miranda.Teleport.CommandDelHome;
+import fun.miranda.Teleport.CommandHome;
+import fun.miranda.Teleport.CommandSetHome;
+import org.bukkit.command.PluginCommand;
+import org.bukkit.command.TabExecutor;
+import org.bukkit.event.Listener;
+import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.ArrayList;
+import java.util.logging.Logger;
+
+public class MeowUtils extends JavaPlugin {
+    public static MeowUtils plugin;
+    private Logger logger;
+
+    /**
+     * 插件载入
+     */
+    @Override
+    public void onLoad() {
+        logger = this.getServer().getLogger();
+        updateConfig();
+    }
+
+    /**
+     * 插件启用
+     */
+    @Override
+    public void onEnable() {
+        plugin = this;
+        if (this.getConfig().get("players") == null) {
+            this.getConfig().set("players", new ArrayList<>());
+        }
+        logger.info("§b[§6猫子组件§b] §e正在启用");
+        logger.info("§b[§6猫子组件§b] §e已载入功能：");
+
+        setupCloudChest();
+        setupRollDice();
+        setupImprint();
+        setupSeal();
+        setupTeleport();
+        setupShowWhoTamed();
+    }
+
+    /**
+     * 插件禁用
+     */
+    public void onDisable() {
+        logger.info("§b[§6猫子组件§b] §e正在禁用");
+        saveCloudChest();
+        saveTeleport();
+        this.saveConfig();
+    }
+
+    /**
+     * 初始化烙印卷轴
+     */
+    private void setupImprint() {
+        registerCommand("imprint", new CommandImprint());
+        registerCommand("imprintsign", new CommandImprintSign());
+        registerEvent(new EventImprint());
+        logger.info("§b[§6猫子组件§b] §e  -- 烙印卷轴");
+    }
+
+    /**
+     * 初始化封印卷轴
+     */
+    private void setupSeal() {
+        registerCommand("sealscroll", new CommandSeal());
+        registerEvent(new EventSeal());
+        logger.info("§b[§6猫子组件§b] §e  -- 封印卷轴");
+    }
+
+    /**
+     * 初始化云箱子
+     */
+    private void setupCloudChest() {
+        registerCommand("cc", new CommandCloudChest());
+        if (this.getConfig().getString("chest") == null) {
+            this.getConfig().set("chest", "");
+        }
+        logger.info("§b[§6猫子组件§b] §e  -- 云箱子");
+    }
+
+    /**
+     * 初始化骰娘
+     */
+    private void setupRollDice() {
+        registerEvent(new EventRollDice());
+        logger.info("§b[§6猫子组件§b] §e  -- 骰娘");
+    }
+
+    /**
+     * 初始化驯兽提示
+     */
+    private void setupShowWhoTamed() {
+        registerEvent(new EventShowWhoTamed());
+        logger.info("§b[§6猫子组件§b] §e  -- 驯兽提示");
+    }
+
+    /**
+     * 初始化传送功能，包括设置家，返回家，传送到指定玩家
+     */
+    private void setupTeleport() {
+        registerCommand("sethome", new CommandSetHome());
+        registerCommand("delhome", new CommandDelHome());
+        registerCommand("defhome", new CommandDefaultHome());
+        registerCommand("home", new CommandHome());
+        logger.info("§b[§6猫子组件§b] §e  -- 传送");
+    }
+
+
+    /**
+     * 保存云箱子
+     */
+    private void saveCloudChest() {
+        CloudChest.getChest().save();
+        logger.info("§b[§6猫子组件§b] §e正在保存云箱子");
+    }
+
+    /**
+     * 保存传送信息
+     */
+    private void saveTeleport() {
+        logger.info("§b[§6猫子组件§b] §e正在保存玩家传送信息");
+    }
+
+    /**
+     * 注册命令
+     *
+     * @param command  命令字符串
+     * @param executor 命令
+     */
+    private void registerCommand(String command, TabExecutor executor) {
+        PluginCommand cmd = this.getCommand(command);
+        assert cmd != null;
+        cmd.setExecutor(executor);
+    }
+
+    /**
+     * 注册监听器
+     *
+     * @param listener 监听器
+     */
+    private void registerEvent(Listener listener) {
+        this.getServer().getPluginManager().registerEvents(listener, this);
+    }
+
+    /**
+     * 生成默认配置文件
+     */
+    public void updateConfig() {
+        this.saveDefaultConfig();
+    }
+}
