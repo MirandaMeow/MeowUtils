@@ -5,6 +5,7 @@ import fun.miranda.CloudChest.CommandCloudChest;
 import fun.miranda.ImprintScroll.CommandImprint;
 import fun.miranda.ImprintScroll.CommandImprintSign;
 import fun.miranda.ImprintScroll.EventImprint;
+import fun.miranda.Murder.CommandMurder;
 import fun.miranda.RollDice.EventRollDice;
 import fun.miranda.SealScroll.CommandSeal;
 import fun.miranda.SealScroll.EventSeal;
@@ -70,6 +71,9 @@ public class MeowUtils extends JavaPlugin {
         }
         if (getModuleEnabled("tpsspam")) {
             setupTpsSpam();
+        }
+        if (getModuleEnabled("murder")) {
+            setupMurder();
         }
     }
 
@@ -152,6 +156,14 @@ public class MeowUtils extends JavaPlugin {
         registerCommand("tpsspam", new CommandTpsSpam());
         CommandTpsSpam.TPSClock(this);
         logger.info("§b[§6猫子组件§b] §e  -- Tps 持续显示");
+    }
+
+    /**
+     * 初始化实体清理
+     */
+    private void setupMurder() {
+        registerCommand("murder", new CommandMurder());
+        logger.info("§b[§6猫子组件§b] §e  -- 实体清理");
     }
 
 

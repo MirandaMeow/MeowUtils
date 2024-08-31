@@ -6,5 +6,6 @@ modules:
   teleport: false
   showwhotamed: false
   tpsspam: true
+  murder: true
 players: []
 chest: ''

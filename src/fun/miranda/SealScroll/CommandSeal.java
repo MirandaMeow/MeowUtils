@@ -1,5 +1,6 @@
 package fun.miranda.SealScroll;
 
+import fun.miranda.Utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -8,7 +9,6 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class CommandSeal implements TabExecutor {
     @Override
@@ -25,7 +25,7 @@ public class CommandSeal implements TabExecutor {
             return true;
         }
         String playerName = player.getName();
-        if (!isInt(amount) || amount.equals("0")) {
+        if (!Utils.isInt(amount) || amount.equals("0")) {
             sender.sendMessage("§c数量不正确");
             return true;
         }
@@ -53,10 +53,5 @@ public class CommandSeal implements TabExecutor {
             return new ArrayList<>(Arrays.asList("1", "5", "10", "64"));
         }
         return new ArrayList<>();
-    }
-
-    public static boolean isInt(String string) {
-        Pattern pattern = Pattern.compile("[0-9]*");
-        return pattern.matcher(string).matches();
     }
 }
