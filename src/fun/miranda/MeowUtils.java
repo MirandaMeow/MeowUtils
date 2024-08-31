@@ -13,6 +13,7 @@ import fun.miranda.Teleport.CommandDefaultHome;
 import fun.miranda.Teleport.CommandDelHome;
 import fun.miranda.Teleport.CommandHome;
 import fun.miranda.Teleport.CommandSetHome;
+import fun.miranda.TpsSpam.CommandTpsSpam;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -66,6 +67,9 @@ public class MeowUtils extends JavaPlugin {
         }
         if (getModuleEnabled("showwhotamed")) {
             setupShowWhoTamed();
+        }
+        if (getModuleEnabled("tpsspam")) {
+            setupTpsSpam();
         }
     }
 
@@ -138,6 +142,16 @@ public class MeowUtils extends JavaPlugin {
         registerCommand("defhome", new CommandDefaultHome());
         registerCommand("home", new CommandHome());
         logger.info("§b[§6猫子组件§b] §e  -- 传送");
+    }
+
+
+    /**
+     * 初始化持续在控制台持续显示 tps
+     */
+    private void setupTpsSpam() {
+        registerCommand("tpsspam", new CommandTpsSpam());
+        CommandTpsSpam.TPSClock(this);
+        logger.info("§b[§6猫子组件§b] §e  -- Tps 持续显示");
     }
 
 
