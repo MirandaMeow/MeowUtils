@@ -4,10 +4,12 @@ import fun.miranda.Utils.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class CommandMurder implements TabExecutor {
     @Override
@@ -45,7 +47,18 @@ public class CommandMurder implements TabExecutor {
     }
 
     @Override
-    public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
+    public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] args) {
+        List<EntityType> entityTypes = List.of(EntityType.values());
+        List<String> entityTypesString = new ArrayList<>();
+        for (EntityType type : entityTypes) {
+            entityTypesString.add(type.name());
+        }
+        if (args.length == 1) {
+            return new ArrayList<>();
+        }
+        if (args.length > 1) {
+            return Utils.listFilter(entityTypesString, args[args.length - 1].toUpperCase(Locale.ROOT));
+        }
         return new ArrayList<>();
     }
 }

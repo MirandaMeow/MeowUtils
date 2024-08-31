@@ -5,9 +5,11 @@ import org.bukkit.command.BlockCommandSender;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
+import org.bukkit.entity.EntityType;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class CommandMurderBlock implements TabExecutor {
     @Override
@@ -45,7 +47,18 @@ public class CommandMurderBlock implements TabExecutor {
     }
 
     @Override
-    public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
+    public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] args) {
+        List<EntityType> entityTypes = List.of(EntityType.values());
+        List<String> entityTypesString = new ArrayList<>();
+        for (EntityType type : entityTypes) {
+            entityTypesString.add(type.name());
+        }
+        if (args.length == 1) {
+            return new ArrayList<>();
+        }
+        if (args.length > 1) {
+            return Utils.listFilter(entityTypesString, args[args.length - 1].toUpperCase(Locale.ROOT));
+        }
         return new ArrayList<>();
     }
 }
