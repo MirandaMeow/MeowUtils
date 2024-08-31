@@ -7,5 +7,5 @@ modules:
   showwhotamed: false
   tpsspam: true
   murder: true
-players: []
+players: [ ]
 chest: ''
