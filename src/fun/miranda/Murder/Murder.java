@@ -34,25 +34,52 @@ public class Murder {
             this.targetEntityTypes.addAll(entityTypes);
             return 0;
         }
-        if (type.startsWith("-")) {
-            String temp = type.substring(1);
-            try {
-                EntityType entityType = EntityType.valueOf(temp.toUpperCase(Locale.ROOT));
-                if (this.targetEntityTypes.contains(entityType)) {
-                    this.targetEntityTypes.remove(entityType);
-                    return 0;
-                } else {
-                    return 1;
-                }
-            } catch (IllegalArgumentException e) {
-                return 1;
-            }
-        }
         try {
-            EntityType entityType = EntityType.valueOf(type.toUpperCase(Locale.ROOT));
-            if (!this.targetEntityTypes.contains(entityType)) {
-                this.targetEntityTypes.add(entityType);
+            if (type.endsWith("*")) {
+                return this.operateWithStar(type);
+            } else {
+                return this.operateWithoutStar(type);
+            }
+        } catch (IllegalArgumentException e) {
+            return 1;
+        }
+    }
+
+    private int operateWithStar(String type) {
+        try {
+            if (type.startsWith("-")) {
+                type = type.substring(1, type.length() - 1).toUpperCase(Locale.ROOT);
+                for (EntityType entityType : this.entityTypes) {
+                    if (entityType.name().startsWith(type)) {
+                        this.targetEntityTypes.remove(entityType);
+                    }
+                }
+            } else {
+                for (EntityType entityType : this.entityTypes) {
+                    if (entityType.name().startsWith(type.substring(0, type.length() - 1))) {
+                        this.targetEntityTypes.add(entityType);
+                    }
+                }
+            }
+            return 0;
+        } catch (IllegalArgumentException e) {
+            return 1;
+        }
+    }
+
+    private int operateWithoutStar(String type) {
+        try {
+            if (type.startsWith("-")) {
+                type = type.substring(1).toUpperCase(Locale.ROOT);
+                EntityType entityType = EntityType.valueOf(type);
+                this.targetEntityTypes.remove(entityType);
                 return 0;
+            } else {
+                EntityType entityType = EntityType.valueOf(type.toUpperCase(Locale.ROOT));
+                if (!this.targetEntityTypes.contains(entityType)) {
+                    this.targetEntityTypes.add(entityType);
+                    return 0;
+                }
             }
         } catch (IllegalArgumentException e) {
             return 1;
