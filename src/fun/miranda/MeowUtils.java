@@ -205,6 +205,10 @@ public class MeowUtils extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(listener, this);
     }
 
+    /**
+     * @param moduleName 指定的模块
+     * @return 返回指定模块是否启用
+     */
     private boolean getModuleEnabled(String moduleName) {
         return this.config.getBoolean(String.format("modules.%s", moduleName));
     }

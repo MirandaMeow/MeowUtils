@@ -11,21 +11,15 @@ import java.util.List;
 
 public class CommandTpsSpam implements TabExecutor {
     private static boolean flag = true;
-    private boolean run = false;
-    public static MeowUtils plugin;
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
-        if (!(sender instanceof ConsoleCommandSender console)) {
-            sender.sendMessage("Only available in console.");
+        if (!(sender instanceof ConsoleCommandSender)) {
+            sender.sendMessage("该命令只能由玩家执行");
             return true;
         }
-        if (!run) {
-            TPSClock(plugin);
-            run = true;
-        }
         flag = !flag;
-        sender.sendMessage(String.format("[TPSSpam] Set to %s", flag));
+        sender.sendMessage(String.format("TPSSpam 开关设置为 %s", flag));
         return true;
     }
 
