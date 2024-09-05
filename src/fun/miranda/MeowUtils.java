@@ -6,6 +6,7 @@ import fun.miranda.ImprintScroll.CommandImprint;
 import fun.miranda.ImprintScroll.CommandImprintSign;
 import fun.miranda.ImprintScroll.EventImprint;
 import fun.miranda.Murder.CommandMurder;
+import fun.miranda.Murder.CountEntity;
 import fun.miranda.Murder.EventShowEntityType;
 import fun.miranda.RollDice.EventRollDice;
 import fun.miranda.SealScroll.CommandSeal;
@@ -27,7 +28,7 @@ import java.util.logging.Logger;
 
 public class MeowUtils extends JavaPlugin {
     public static MeowUtils plugin;
-    private Logger logger;
+    public Logger logger;
     public FileConfiguration config;
 
     /**
@@ -164,6 +165,7 @@ public class MeowUtils extends JavaPlugin {
      */
     private void setupMurder() {
         registerCommand("murder", new CommandMurder());
+        registerCommand("ce", new CountEntity());
         registerEvent(new EventShowEntityType());
         logger.info("§b[§6猫子组件§b] §e  -- 实体清理");
     }

@@ -39,8 +39,15 @@ commands:
   tpsspam:
     description: 切换控制台是否持续显示 tps
     usage: /tpsspam
+    permission: meowutils.tpsspam
+    permission-message: §c你没有权限
   murder:
     description: 清除范围内的指定类型的实体
     usage: /murder <distance> <EntityType...>
     permission: meowutils.murder
+    permission-message: §c你没有权限
+  ce:
+    description: 按照实体类型计数实体数量
+    usage: /ce
+    permission: meowutils.ce
     permission-message: §c你没有权限

@@ -1,10 +1,7 @@
 package fun.miranda.Murder;
 
 import fun.miranda.Utils.Utils;
-import org.bukkit.command.BlockCommandSender;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabExecutor;
+import org.bukkit.command.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
@@ -17,10 +14,6 @@ public class CommandMurder implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         Murder murder;
-        if (!(sender instanceof Player) && !(sender instanceof BlockCommandSender)) {
-            sender.sendMessage("该命令只能由玩家或命令方块执行");
-            return true;
-        }
         if (args.length < 2) {
             sender.sendMessage("§e用法: §6/murder §b<distance> <EntityType...>");
             return true;
@@ -37,8 +30,10 @@ public class CommandMurder implements TabExecutor {
         }
         if (sender instanceof Player) {
             murder = new Murder((Player) sender, distance);
-        } else {
+        } else if (sender instanceof BlockCommandSender) {
             murder = new Murder((BlockCommandSender) sender, distance);
+        } else {
+            murder = new Murder();
         }
         int success = 0;
         for (int i = 1; i < args.length; i++) {

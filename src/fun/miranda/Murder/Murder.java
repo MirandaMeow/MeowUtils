@@ -1,7 +1,10 @@
 package fun.miranda.Murder;
 
+import fun.miranda.MeowUtils;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.command.BlockCommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -12,20 +15,27 @@ import java.util.Locale;
 
 public class Murder {
     private List<EntityType> targetEntityTypes;
-    private final Location location;
-    private final int distance;
     private final List<EntityType> entityTypes = List.of(EntityType.values());
+    private final List<Entity> entities;
 
     public Murder(Player player, int distance) {
-        this.location = player.getLocation();
-        this.distance = distance;
+        Location location = player.getLocation();
         this.targetEntityTypes = new ArrayList<>();
+        this.entities = (List<Entity>) location.getWorld().getNearbyEntities(location, distance, 255, distance);
     }
 
     public Murder(BlockCommandSender block, int distance) {
-        this.location = block.getBlock().getLocation();
-        this.distance = distance;
+        Location location = block.getBlock().getLocation();
         this.targetEntityTypes = new ArrayList<>();
+        this.entities = (List<Entity>) location.getWorld().getNearbyEntities(location, distance, 255, distance);
+    }
+
+    public Murder() {
+        this.targetEntityTypes = new ArrayList<>();
+        this.entities = new ArrayList<>();
+        for (World world : MeowUtils.plugin.getServer().getWorlds()) {
+            this.entities.addAll(world.getEntities());
+        }
     }
 
     public int modifyType(String type) {
@@ -89,8 +99,7 @@ public class Murder {
 
     public Integer kill() {
         int count = 0;
-        List<Entity> entities = (List<Entity>) this.location.getWorld().getNearbyEntities(this.location, this.distance, 255, this.distance);
-        for (Entity currentEntity : entities) {
+        for (Entity currentEntity : this.entities) {
             EntityType currentEntityType = currentEntity.getType();
             if (currentEntityType == EntityType.PLAYER) {
                 continue;
