@@ -36,6 +36,9 @@ commands:
   home:
     description: 回到指定家
     usage: /home [homeName]
+  backcorpse:
+    description: 回到上次死亡的地方
+    usage: /backcorpse
   tpsspam:
     description: 切换控制台是否持续显示 tps
     usage: /tpsspam

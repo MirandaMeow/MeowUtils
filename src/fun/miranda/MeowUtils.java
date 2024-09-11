@@ -5,17 +5,14 @@ import fun.miranda.CloudChest.CommandCloudChest;
 import fun.miranda.ImprintScroll.CommandImprint;
 import fun.miranda.ImprintScroll.CommandImprintSign;
 import fun.miranda.ImprintScroll.EventImprint;
+import fun.miranda.Murder.CommandCountEntity;
 import fun.miranda.Murder.CommandMurder;
-import fun.miranda.Murder.CountEntity;
 import fun.miranda.Murder.EventShowEntityType;
 import fun.miranda.RollDice.EventRollDice;
 import fun.miranda.SealScroll.CommandSeal;
 import fun.miranda.SealScroll.EventSeal;
 import fun.miranda.ShowWhoTamed.EventShowWhoTamed;
-import fun.miranda.Teleport.CommandDefaultHome;
-import fun.miranda.Teleport.CommandDelHome;
-import fun.miranda.Teleport.CommandHome;
-import fun.miranda.Teleport.CommandSetHome;
+import fun.miranda.Teleport.*;
 import fun.miranda.TpsSpam.CommandTpsSpam;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabExecutor;
@@ -147,6 +144,8 @@ public class MeowUtils extends JavaPlugin {
         registerCommand("delhome", new CommandDelHome());
         registerCommand("defhome", new CommandDefaultHome());
         registerCommand("home", new CommandHome());
+        registerCommand("backcorpse", new CommandBackCorpse());
+        registerEvent(new EventPlayerDeath());
         logger.info("§b[§6猫子组件§b] §e  -- 传送");
     }
 
@@ -165,7 +164,7 @@ public class MeowUtils extends JavaPlugin {
      */
     private void setupMurder() {
         registerCommand("murder", new CommandMurder());
-        registerCommand("ce", new CountEntity());
+        registerCommand("ce", new CommandCountEntity());
         registerEvent(new EventShowEntityType());
         logger.info("§b[§6猫子组件§b] §e  -- 实体清理");
     }

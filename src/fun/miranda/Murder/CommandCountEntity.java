@@ -12,7 +12,7 @@ import java.util.*;
 
 import static fun.miranda.MeowUtils.plugin;
 
-public class CountEntity implements TabExecutor {
+public class CommandCountEntity implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
 
