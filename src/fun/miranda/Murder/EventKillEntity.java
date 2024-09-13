@@ -15,7 +15,7 @@ public class EventKillEntity implements Listener {
     @EventHandler(priority = EventPriority.NORMAL)
     private void killEntity(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (!player.isSneaking() || player.getInventory().getItemInMainHand().getType() != Material.BLAZE_ROD) {
+        if (!player.isSneaking() || player.getInventory().getItemInMainHand().getType() != Material.NAUTILUS_SHELL) {
             return;
         }
         event.setCancelled(true);
@@ -30,7 +30,7 @@ public class EventKillEntity implements Listener {
             return;
         }
         damageableTarget.remove();
-        player.getServer().broadcastMessage(String.format("§e%s: §bAvada Kedavra!", player));
+        player.getServer().broadcastMessage(String.format("§e%s: §bAvada Kedavra!", player.getName()));
     }
 
     private Entity getPlayerSeeEntity(Player player) {

@@ -4,7 +4,6 @@ import fun.miranda.MeowUtils;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.BlockCommandSender;
-import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
@@ -21,13 +20,21 @@ public class Murder {
     public Murder(Player player, int distance) {
         Location location = player.getLocation();
         this.targetEntityTypes = new ArrayList<>();
-        this.entities = (List<Entity>) location.getWorld().getNearbyEntities(location, distance, 255, distance);
+        if (distance != 0) {
+            this.entities = (List<Entity>) location.getWorld().getNearbyEntities(location, distance, 255, distance);
+        } else {
+            this.entities = location.getWorld().getEntities();
+        }
     }
 
     public Murder(BlockCommandSender block, int distance) {
         Location location = block.getBlock().getLocation();
         this.targetEntityTypes = new ArrayList<>();
-        this.entities = (List<Entity>) location.getWorld().getNearbyEntities(location, distance, 255, distance);
+        if (distance != 0) {
+            this.entities = (List<Entity>) location.getWorld().getNearbyEntities(location, distance, 255, distance);
+        } else {
+            this.entities = location.getWorld().getEntities();
+        }
     }
 
     public Murder() {

@@ -24,7 +24,7 @@ public class CommandMurder implements TabExecutor {
             return true;
         }
         int distance = Integer.parseInt(distanceString);
-        if (distance <= 0) {
+        if (distance < 0) {
             sender.sendMessage("§c输入的距离不正确");
             return true;
         }
