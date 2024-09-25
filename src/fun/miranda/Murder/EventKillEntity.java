@@ -37,6 +37,9 @@ public class EventKillEntity implements Listener {
         Location playerEyeLocation = player.getEyeLocation();
         Location adjustedLocation = playerEyeLocation.add(playerEyeLocation.getDirection().multiply(0.62));
         RayTraceResult result = player.getWorld().rayTraceEntities(adjustedLocation, playerEyeLocation.getDirection(), 10);
+        if (result == null) {
+            return null;
+        }
         return result.getHitEntity();
     }
 }
