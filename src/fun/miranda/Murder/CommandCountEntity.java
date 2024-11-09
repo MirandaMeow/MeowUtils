@@ -17,7 +17,7 @@ public class CommandCountEntity implements TabExecutor {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
 
         if (!(sender instanceof ConsoleCommandSender)) {
-            sender.sendMessage("该命令只能由玩家执行");
+            sender.sendMessage("该命令只能由控制台执行");
             return true;
         }
 

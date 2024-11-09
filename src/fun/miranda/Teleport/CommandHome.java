@@ -10,7 +10,7 @@ import java.util.List;
 
 public class CommandHome implements TabExecutor {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if (!(sender instanceof Player)) {
+        if (!(sender instanceof Player player)) {
             sender.sendMessage("该命令只能由玩家执行");
             return true;
         }
@@ -19,10 +19,9 @@ public class CommandHome implements TabExecutor {
             return true;
         }
         String homeName = args.length == 1 ? args[0] : "";
-        Player player = (Player) sender;
         PlayerTeleport teleport = new PlayerTeleport(player.getUniqueId());
         String result = teleport.teleportHome(homeName, player);
-        if (result != "") {
+        if (!result.equals("")) {
             sender.sendMessage("§e已传送到家 §b" + result);
         } else {
             sender.sendMessage("§c未设置默认家或者家不存在");

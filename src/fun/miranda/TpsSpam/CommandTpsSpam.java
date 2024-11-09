@@ -12,6 +12,14 @@ import java.util.List;
 public class CommandTpsSpam implements TabExecutor {
     private static boolean flag = true;
 
+    public static void TPSClock(MeowUtils plugin) {
+        plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
+            if (flag) {
+                plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), "tps");
+            }
+        }, 0L, 200L);
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
         if (!(sender instanceof ConsoleCommandSender)) {
@@ -26,13 +34,5 @@ public class CommandTpsSpam implements TabExecutor {
     @Override
     public List<String> onTabComplete(CommandSender commandSender, Command command, String s, String[] strings) {
         return new ArrayList<>();
-    }
-
-    public static void TPSClock(MeowUtils plugin) {
-        plugin.getServer().getScheduler().runTaskTimer(plugin, () -> {
-            if (flag) {
-                plugin.getServer().dispatchCommand(plugin.getServer().getConsoleSender(), "tps");
-            }
-        }, 0L, 200L);
     }
 }

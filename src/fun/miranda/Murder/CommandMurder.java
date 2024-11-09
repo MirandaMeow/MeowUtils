@@ -1,7 +1,10 @@
 package fun.miranda.Murder;
 
 import fun.miranda.Utils.Utils;
-import org.bukkit.command.*;
+import org.bukkit.command.BlockCommandSender;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 

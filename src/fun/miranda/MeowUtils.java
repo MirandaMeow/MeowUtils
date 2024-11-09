@@ -146,6 +146,7 @@ public class MeowUtils extends JavaPlugin {
         registerCommand("defhome", new CommandDefaultHome());
         registerCommand("home", new CommandHome());
         registerCommand("backcorpse", new CommandBackCorpse());
+        registerCommand("rtp", new CommandRandomTP());
         registerEvent(new EventPlayerDeath());
         logger.info("§b[§6猫子组件§b] §e  -- 传送");
     }

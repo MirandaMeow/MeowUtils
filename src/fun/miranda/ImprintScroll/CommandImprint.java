@@ -11,6 +11,11 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class CommandImprint implements TabExecutor {
+    public static boolean isInt(String string) {
+        Pattern pattern = Pattern.compile("[0-9]*");
+        return pattern.matcher(string).matches();
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, org.bukkit.command.Command command, String s, String[] args) {
         if (args.length != 2) {
@@ -53,10 +58,5 @@ public class CommandImprint implements TabExecutor {
             return new ArrayList<>(Arrays.asList("1", "5", "10", "64"));
         }
         return new ArrayList<>();
-    }
-
-    public static boolean isInt(String string) {
-        Pattern pattern = Pattern.compile("[0-9]*");
-        return pattern.matcher(string).matches();
     }
 }

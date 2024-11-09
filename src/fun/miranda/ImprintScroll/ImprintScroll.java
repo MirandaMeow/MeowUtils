@@ -58,6 +58,55 @@ public class ImprintScroll {
         this.location = new Location(null, 0, 0, 0, 0, 0);
     }
 
+    public static boolean isScroll(ItemStack itemStack) {
+        if (itemStack.getType().equals(Material.AIR)) {
+            return false;
+        }
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        assert itemMeta != null;
+        return itemMeta.getDisplayName().equals("§9§l烙印卷轴");
+    }
+
+    public static String sign(Player player, String sign) {
+        ItemStack handItem = player.getInventory().getItemInMainHand();
+        if (!isScroll(handItem)) {
+            return "§c手中物品不是烙印卷轴";
+        }
+        ItemMeta scrollMeta = handItem.getItemMeta();
+        assert scrollMeta != null;
+        List<String> lores = scrollMeta.getLore();
+        assert lores != null;
+        if (!lores.get(1).equals("§6[已缔结烙印]")) {
+            return "§c还未缔结烙印";
+        }
+        if (lores.get(9).contains("镌刻")) {
+            return "§c烙印卷轴已被镌刻";
+        }
+        lores.add(9, String.format("§6[由 §e%s §6镌刻]", player.getName()));
+        lores.add(10, "§3" + sign);
+        lores.add(11, "");
+        scrollMeta.setLore(lores);
+        handItem.setItemMeta(scrollMeta);
+        return "§e成功镌刻铭文";
+    }
+
+    public static int giveScroll(Player player, int amount) {
+        ItemStack item = getBlankScroll().clone();
+        item.setAmount(amount);
+        HashMap<Integer, ItemStack> result = player.getInventory().addItem(item);
+        if (result.isEmpty()) {
+            return 0;
+        }
+        return result.get(0).getAmount();
+    }
+
+    public static ItemStack getBlankScroll() {
+        if (blankScroll == null) {
+            blankScroll = new ImprintScroll();
+        }
+        return blankScroll.scroll;
+    }
+
     public void conclude(Player player) {
         if (this.isImprinted) {
             return;
@@ -115,54 +164,5 @@ public class ImprintScroll {
 
     public ItemStack getScroll() {
         return this.scroll;
-    }
-
-    public static boolean isScroll(ItemStack itemStack) {
-        if (itemStack.getType().equals(Material.AIR)) {
-            return false;
-        }
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        assert itemMeta != null;
-        return itemMeta.getDisplayName().equals("§9§l烙印卷轴");
-    }
-
-    public static String sign(Player player, String sign) {
-        ItemStack handItem = player.getInventory().getItemInMainHand();
-        if (!isScroll(handItem)) {
-            return "§c手中物品不是烙印卷轴";
-        }
-        ItemMeta scrollMeta = handItem.getItemMeta();
-        assert scrollMeta != null;
-        List<String> lores = scrollMeta.getLore();
-        assert lores != null;
-        if (!lores.get(1).equals("§6[已缔结烙印]")) {
-            return "§c还未缔结烙印";
-        }
-        if (lores.get(9).contains("镌刻")) {
-            return "§c烙印卷轴已被镌刻";
-        }
-        lores.add(9, String.format("§6[由 §e%s §6镌刻]", player.getName()));
-        lores.add(10, "§3" + sign);
-        lores.add(11, "");
-        scrollMeta.setLore(lores);
-        handItem.setItemMeta(scrollMeta);
-        return "§e成功镌刻铭文";
-    }
-
-    public static int giveScroll(Player player, int amount) {
-        ItemStack item = getBlankScroll().clone();
-        item.setAmount(amount);
-        HashMap<Integer, ItemStack> result = player.getInventory().addItem(item);
-        if (result.isEmpty()) {
-            return 0;
-        }
-        return result.get(0).getAmount();
-    }
-
-    public static ItemStack getBlankScroll() {
-        if (blankScroll == null) {
-            blankScroll = new ImprintScroll();
-        }
-        return blankScroll.scroll;
     }
 }

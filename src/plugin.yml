@@ -1,6 +1,6 @@
 name: MeowUtils
 main: fun.miranda.MeowUtils
-version: 1.1.0
+version: 1.1.2
 author: Miranda
 description: 猫子组件
 softdepend: [ ]
@@ -39,6 +39,9 @@ commands:
   backcorpse:
     description: 回到上次死亡的地方
     usage: /backcorpse
+  rtp:
+    description: 随机传送
+    usage: /rtp <X> <Y> <Z> <radius> <player>
   tpsspam:
     description: 切换控制台是否持续显示 tps
     usage: /tpsspam

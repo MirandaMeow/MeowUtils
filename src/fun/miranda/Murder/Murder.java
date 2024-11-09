@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.Locale;
 
 public class Murder {
-    private List<EntityType> targetEntityTypes;
     private final List<EntityType> entityTypes = List.of(EntityType.values());
     private final List<Entity> entities;
+    private List<EntityType> targetEntityTypes;
 
     public Murder(Player player, int distance) {
         Location location = player.getLocation();

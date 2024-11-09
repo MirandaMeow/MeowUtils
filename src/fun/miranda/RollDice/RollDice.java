@@ -10,9 +10,9 @@ import java.util.regex.Pattern;
 public class RollDice {
     public Integer sum = 0;
     public String result;
+    public boolean validate = true;
     private Integer r = 1;
     private StringBuilder numbersString;
-    public boolean validate = true;
 
     public RollDice(Player player, String chat) {
         String playerName = player.getName();

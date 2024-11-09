@@ -11,7 +11,7 @@ import java.util.List;
 public class CommandSetHome implements TabExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-        if (!(sender instanceof Player)) {
+        if (!(sender instanceof Player player)) {
             sender.sendMessage("该命令只能由玩家执行");
             return true;
         }
@@ -24,7 +24,6 @@ public class CommandSetHome implements TabExecutor {
             return true;
         }
         String homeName = args[0];
-        Player player = (Player) sender;
         PlayerTeleport teleport = new PlayerTeleport(player.getUniqueId());
         boolean result = teleport.addHome(player.getLocation(), homeName);
         if (result) {

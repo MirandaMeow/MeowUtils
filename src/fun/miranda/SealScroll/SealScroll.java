@@ -15,18 +15,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class SealScroll {
+    public static SealScroll blankScroll = null;
     public ItemStack scroll;
     public boolean isSealed;
     private String seal;
     private EntityType type;
-    public static SealScroll blankScroll = null;
-
-    public static ItemStack getBlankScroll() {
-        if (blankScroll == null) {
-            blankScroll = new SealScroll();
-        }
-        return blankScroll.scroll;
-    }
 
     public SealScroll() {
         this.scroll = new ItemStack(Material.PAPER, 1);
@@ -62,6 +55,13 @@ public class SealScroll {
         }
     }
 
+    public static ItemStack getBlankScroll() {
+        if (blankScroll == null) {
+            blankScroll = new SealScroll();
+        }
+        return blankScroll.scroll;
+    }
+
     public static int giveScroll(Player player, int amount) {
         ItemStack item = getBlankScroll().clone();
         item.setAmount(amount);
@@ -70,6 +70,15 @@ public class SealScroll {
             return 0;
         }
         return result.get(0).getAmount();
+    }
+
+    public static boolean isSealScroll(ItemStack itemStack) {
+        if (itemStack.getType().equals(Material.AIR)) {
+            return false;
+        }
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        assert itemMeta != null;
+        return itemMeta.getDisplayName().equals("§9§l封印卷轴");
     }
 
     public void seal(Entity entity, Player player) {
@@ -110,14 +119,5 @@ public class SealScroll {
         NBTEditor.set(entity, compound);
         entity.teleport(player.getLocation());
         player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
-    }
-
-    public static boolean isSealScroll(ItemStack itemStack) {
-        if (itemStack.getType().equals(Material.AIR)) {
-            return false;
-        }
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        assert itemMeta != null;
-        return itemMeta.getDisplayName().equals("§9§l封印卷轴");
     }
 }

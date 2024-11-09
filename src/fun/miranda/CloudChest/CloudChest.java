@@ -16,15 +16,15 @@ public class CloudChest {
     private static CloudChest cloudChest = null;
     private final Inventory chestInv;
 
+    private CloudChest() {
+        this.chestInv = this.read();
+    }
+
     public static CloudChest getChest() {
         if (cloudChest == null) {
             cloudChest = new CloudChest();
         }
         return cloudChest;
-    }
-
-    private CloudChest() {
-        this.chestInv = this.read();
     }
 
     public void showChest(Player player) {
