@@ -57,3 +57,11 @@ commands:
     usage: /ce
     permission: meowutils.ce
     permission-message: §c你没有权限
+  healthset:
+    description: 设置玩家的血量
+    usage: /healthset <player> <value>
+    permission: meowutils.healthset
+    permission-message: §c你没有权限
+  tp:
+    description: 传送
+    usage: /tp <player>|<X> <Y> <Z>

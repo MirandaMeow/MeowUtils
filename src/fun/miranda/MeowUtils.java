@@ -2,6 +2,7 @@ package fun.miranda;
 
 import fun.miranda.CloudChest.CloudChest;
 import fun.miranda.CloudChest.CommandCloudChest;
+import fun.miranda.HealthSet.CommandHealthSet;
 import fun.miranda.ImprintScroll.CommandImprint;
 import fun.miranda.ImprintScroll.CommandImprintSign;
 import fun.miranda.ImprintScroll.EventImprint;
@@ -75,6 +76,9 @@ public class MeowUtils extends JavaPlugin {
         if (getModuleEnabled("murder")) {
             setupMurder();
         }
+        if (getModuleEnabled("playerTwist")) {
+            setupPlayerTwist();
+        }
     }
 
     /**
@@ -147,6 +151,7 @@ public class MeowUtils extends JavaPlugin {
         registerCommand("home", new CommandHome());
         registerCommand("backcorpse", new CommandBackCorpse());
         registerCommand("rtp", new CommandRandomTP());
+        registerCommand("tp", new CommandTP());
         registerEvent(new EventPlayerDeath());
         logger.info("§b[§6猫子组件§b] §e  -- 传送");
     }
@@ -170,6 +175,11 @@ public class MeowUtils extends JavaPlugin {
         registerEvent(new EventShowEntityType());
         registerEvent(new EventKillEntity());
         logger.info("§b[§6猫子组件§b] §e  -- 实体清理");
+    }
+
+    private void setupPlayerTwist() {
+        registerCommand("healthset", new CommandHealthSet());
+        logger.info("§b[§6猫子组件§b] §e  -- 玩家调整");
     }
 
 
@@ -214,6 +224,6 @@ public class MeowUtils extends JavaPlugin {
      * @return 返回指定模块是否启用
      */
     private boolean getModuleEnabled(String moduleName) {
-        return this.config.getBoolean(String.format("modules.%s", moduleName));
+        return this.config.getBoolean(String.format("modules.%s", moduleName), false);
     }
 }
