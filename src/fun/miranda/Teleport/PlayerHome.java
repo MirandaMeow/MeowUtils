@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class PlayerTeleport {
+public class PlayerHome {
     private final UUID uuid;
     private final String path;
 
-    public PlayerTeleport(UUID uuid) {
+    public PlayerHome(UUID uuid) {
         this.uuid = uuid;
         this.path = "players." + uuid.toString() + ".homes";
         if (MeowUtils.plugin.config.get(this.path) == null) {
@@ -74,8 +74,8 @@ public class PlayerTeleport {
 
     public String teleportHome(String homeName, Player player) {
         List<String> homeNames = this.getHomeNames();
-        if (homeName == "") {
-            if (this.getDefaultHome() != "") {
+        if (homeName.isEmpty()) {
+            if (!this.getDefaultHome().isEmpty()) {
                 homeName = this.getDefaultHome();
             } else {
                 return "";

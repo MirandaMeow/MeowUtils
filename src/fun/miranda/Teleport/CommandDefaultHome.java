@@ -20,12 +20,12 @@ public class CommandDefaultHome implements TabExecutor {
             return true;
         }
         if (args.length > 1) {
-            sender.sendMessage("§e用法: §e/delhome <homename>");
+            sender.sendMessage("§e用法: §e/defhome <homename>");
             return true;
         }
         String homeName = args[0];
-        PlayerTeleport teleport = new PlayerTeleport(player.getUniqueId());
-        boolean result = teleport.setDefaultHome(homeName);
+        PlayerHome playerHome = new PlayerHome(player.getUniqueId());
+        boolean result = playerHome.setDefaultHome(homeName);
         if (result) {
             sender.sendMessage("§e成功将默认家设置为 §b" + homeName);
         } else {
@@ -38,7 +38,7 @@ public class CommandDefaultHome implements TabExecutor {
     public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] args) {
         if (args.length == 1) {
             Player player = (Player) sender;
-            return new PlayerTeleport(player.getUniqueId()).getHomeNames();
+            return new PlayerHome(player.getUniqueId()).getHomeNames();
         }
         return new ArrayList<>();
     }
