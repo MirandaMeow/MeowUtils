@@ -8,5 +8,6 @@ modules:
   tpsspam: true
   murder: true
   playerTwist: true
+  flyTicket: true
 players: [ ]
 chest: ''

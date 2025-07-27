@@ -13,9 +13,9 @@ public class PlayerHome {
     private final UUID uuid;
     private final String path;
 
-    public PlayerHome(UUID uuid) {
-        this.uuid = uuid;
-        this.path = "players." + uuid.toString() + ".homes";
+    public PlayerHome(Player player) {
+        this.uuid = player.getUniqueId();
+        this.path = "players." + uuid + ".homes";
         if (MeowUtils.plugin.config.get(this.path) == null) {
             MeowUtils.plugin.config.set(this.path, new ArrayList<>());
             MeowUtils.plugin.config.set("players." + uuid + ".defaultHome", "");

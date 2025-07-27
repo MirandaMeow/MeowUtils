@@ -1,6 +1,6 @@
 name: MeowUtils
 main: fun.miranda.MeowUtils
-version: 1.3.0
+version: 1.4.0
 author: Miranda
 description: 猫子组件
 softdepend: [ ]
@@ -68,3 +68,11 @@ commands:
   tphere:
     description: 将玩家传送到自己的位置
     usage: /tphere <player>
+  flyticket:
+    description: 给玩家飞行券
+    usage: /flyticket <fliTime>
+    permission: meowutils.flyticket
+    permission-message: §c你没有权限
+  openfly:
+    description: 切换是否开启飞行
+    usage: /openfly

@@ -2,6 +2,10 @@ package fun.miranda;
 
 import fun.miranda.CloudChest.CloudChest;
 import fun.miranda.CloudChest.CommandCloudChest;
+import fun.miranda.FlyTicket.CommandFlyTicket;
+import fun.miranda.FlyTicket.CommandOpenFly;
+import fun.miranda.FlyTicket.EventFlyTicket;
+import fun.miranda.FlyTicket.PlayerFlyTime;
 import fun.miranda.HealthSet.CommandHealthSet;
 import fun.miranda.ImprintScroll.CommandImprint;
 import fun.miranda.ImprintScroll.CommandImprintSign;
@@ -79,6 +83,9 @@ public class MeowUtils extends JavaPlugin {
         if (getModuleEnabled("playerTwist")) {
             setupPlayerTwist();
         }
+        if (getModuleEnabled("flyTicket")) {
+            setupFlyticket();
+        }
     }
 
     /**
@@ -91,6 +98,9 @@ public class MeowUtils extends JavaPlugin {
         }
         if (getModuleEnabled("teleport")) {
             saveTeleport();
+        }
+        if (getModuleEnabled("flyTicket")) {
+            saveFlyTicket();
         }
         this.saveConfig();
     }
@@ -183,6 +193,13 @@ public class MeowUtils extends JavaPlugin {
         logger.info("§b[§6猫子组件§b] §e  -- 玩家调整");
     }
 
+    private void setupFlyticket() {
+        registerCommand("flyticket", new CommandFlyTicket());
+        registerCommand("openfly", new CommandOpenFly());
+        registerEvent(new EventFlyTicket());
+        logger.info("§b[§6猫子组件§b] §e  -- 飞行券");
+    }
+
 
     /**
      * 保存云箱子
@@ -197,6 +214,11 @@ public class MeowUtils extends JavaPlugin {
      */
     private void saveTeleport() {
         logger.info("§b[§6猫子组件§b] §e正在保存玩家传送信息");
+    }
+
+    private void saveFlyTicket() {
+        PlayerFlyTime.saveALL();
+        logger.info("§b[§6猫子组件§b] §e正在保存飞行券信息");
     }
 
     /**

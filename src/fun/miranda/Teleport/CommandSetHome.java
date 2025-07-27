@@ -24,7 +24,7 @@ public class CommandSetHome implements TabExecutor {
             return true;
         }
         String homeName = args[0];
-        PlayerHome playerHome = new PlayerHome(player.getUniqueId());
+        PlayerHome playerHome = new PlayerHome(player);
         boolean result = playerHome.addHome(player.getLocation(), homeName);
         if (result) {
             sender.sendMessage("§e设置家 §b" + homeName + " §e成功");

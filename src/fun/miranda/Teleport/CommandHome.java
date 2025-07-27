@@ -19,7 +19,7 @@ public class CommandHome implements TabExecutor {
             return true;
         }
         String homeName = args.length == 1 ? args[0] : "";
-        PlayerHome playerHome = new PlayerHome(player.getUniqueId());
+        PlayerHome playerHome = new PlayerHome(player);
         String result = playerHome.teleportHome(homeName, player);
         if (!result.equals("")) {
             sender.sendMessage("§e已传送到家 §b" + result);
@@ -33,7 +33,7 @@ public class CommandHome implements TabExecutor {
     public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] args) {
         if (args.length == 1) {
             Player player = (Player) sender;
-            return new PlayerHome(player.getUniqueId()).getHomeNames();
+            return new PlayerHome(player).getHomeNames();
         }
         return new ArrayList<>();
     }
