@@ -77,9 +77,11 @@ public class PlayerFlyTime {
         }
         TaskFlyTiming task = tasks.get(this.player);
         if (task != null) {
-            task.stop();
-            this.player.setAllowFlight(false);
-            this.player.setFlying(false);
+            if (!task.isCancelled()) {
+                task.stop();
+                this.player.setAllowFlight(false);
+                this.player.setFlying(false);
+            }
         }
         this.saveFlyTime();
         this.flyEnabled = false;
