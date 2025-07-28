@@ -18,9 +18,9 @@ public class TaskFlyTiming {
         this.isCancelled = false;
         this.task = Bukkit.getScheduler().runTaskTimer(MeowUtils.plugin, () -> {
             Integer flyTime = PlayerFlyTime.playerFlyTime.get(player);
+            flyTime -= 1;
+            PlayerFlyTime.playerFlyTime.put(player, flyTime);
             if (flyTime > 0) {
-                flyTime -= 1;
-                PlayerFlyTime.playerFlyTime.put(player, flyTime);
                 if (alarmFlyTime.contains(flyTime)) {
                     player.sendMessage(String.format("§e飞行时长剩余 §b%d §e秒", flyTime));
                 }

@@ -13,19 +13,11 @@ public class PlayerFlyTime {
 
     private final String path;
     private final Player player;
-    public boolean flyEnabled;
 
     public PlayerFlyTime(Player player) {
         UUID uuid = player.getUniqueId();
         this.path = "players." + uuid + ".flytime";
         this.player = player;
-
-        if (!tasks.containsKey(player)) {
-            this.flyEnabled = false;
-        } else {
-            TaskFlyTiming task = tasks.get(player);
-            this.flyEnabled = !task.isCancelled();
-        }
 
         if (MeowUtils.plugin.config.get(this.path) == null) {
             MeowUtils.plugin.config.set(this.path, 0);
@@ -53,13 +45,22 @@ public class PlayerFlyTime {
         }
     }
 
+    public boolean isFlyEnabled() {
+        if (!tasks.containsKey(player)) {
+            return false;
+        } else {
+            TaskFlyTiming task = tasks.get(player);
+            return !task.isCancelled();
+        }
+    }
+
     public void addFlyTime(Integer addFlyTime) {
         playerFlyTime.put(player, playerFlyTime.get(player) + addFlyTime);
         this.saveFlyTime();
     }
 
     public void startFly() {
-        if (this.flyEnabled) {
+        if (this.isFlyEnabled()) {
             return;
         }
         if (this.getFlyTime() > 0) {
@@ -67,12 +68,11 @@ public class PlayerFlyTime {
             this.player.setFlying(true);
             TaskFlyTiming task = new TaskFlyTiming(this.player);
             tasks.put(player, task);
-            this.flyEnabled = true;
         }
     }
 
     public void stopFly() {
-        if (!this.flyEnabled) {
+        if (!this.isFlyEnabled()) {
             return;
         }
         TaskFlyTiming task = tasks.get(this.player);
@@ -84,6 +84,5 @@ public class PlayerFlyTime {
             }
         }
         this.saveFlyTime();
-        this.flyEnabled = false;
     }
 }

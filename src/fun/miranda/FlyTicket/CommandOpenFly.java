@@ -16,7 +16,7 @@ public class CommandOpenFly implements TabExecutor {
         }
         PlayerFlyTime playerFlyTime = new PlayerFlyTime(player);
         Integer flyTime = playerFlyTime.getFlyTime();
-        if (playerFlyTime.flyEnabled) {
+        if (playerFlyTime.isFlyEnabled()) {
             playerFlyTime.stopFly();
             player.sendMessage(String.format("§e飞行设置为§b关§e, 剩余时长 §b%d §e秒", flyTime));
         } else {
