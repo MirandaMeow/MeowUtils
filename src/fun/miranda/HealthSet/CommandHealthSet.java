@@ -41,7 +41,7 @@ public class CommandHealthSet implements TabExecutor {
         assert playerMaxHealth != null;
         playerMaxHealth.setBaseValue(value);
         player.setHealth(value);
-        sender.sendMessage(String.format("§e将§b%s§e的生命值上线设为§b%d", playerName, value));
+        sender.sendMessage(String.format("§e将§b%s§e的生命值上限设为§b%d", playerName, value));
         return true;
     }
 

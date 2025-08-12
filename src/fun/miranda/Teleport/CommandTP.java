@@ -31,11 +31,15 @@ public class CommandTP implements TabExecutor {
                 String x = args[0];
                 String y = args[1];
                 String z = args[2];
-                if (Utils.isInt(x) && Utils.isInt(y) && Utils.isInt(z)) {
-                    Location location = new Location(player.getWorld(), Integer.parseInt(x), Integer.parseInt(y), Integer.parseInt(z));
+                try {
+                    double dx = Double.parseDouble(x);
+                    double dy = Double.parseDouble(y);
+                    double dz = Double.parseDouble(z);
+                    Location location = new Location(player.getWorld(), dx, dy, dz);
                     player.teleport(location);
-                } else {
+                } catch (NumberFormatException e) {
                     sender.sendMessage("§c坐标不正确");
+                    return true;
                 }
                 break;
             default:
@@ -48,11 +52,8 @@ public class CommandTP implements TabExecutor {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String s, String[] args) {
         if (args.length == 1) {
-            List<String> players = new ArrayList<>();
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                players.add(player.getName());
-            }
-            return players;
+            List<String> players = Utils.getAllPlayersName();
+            return Utils.listFilter(players, args[0]);
         }
         return new ArrayList<>();
     }
