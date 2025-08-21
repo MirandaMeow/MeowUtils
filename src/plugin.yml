@@ -1,6 +1,6 @@
 name: MeowUtils
 main: fun.miranda.MeowUtils
-version: 1.4.0
+version: 1.4.3
 author: Miranda
 description: 猫子组件
 softdepend: [ ]

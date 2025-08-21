@@ -111,7 +111,8 @@ public class RollDice {
 
 
     private Integer getRandomInteger(Integer range) {
-        Random random = new Random();
+        long seed = System.nanoTime();
+        Random random = new Random(seed);
         return random.nextInt(range) + 1;
     }
 
