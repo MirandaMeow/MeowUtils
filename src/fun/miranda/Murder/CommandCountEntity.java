@@ -24,15 +24,16 @@ public class CommandCountEntity implements TabExecutor {
         for (World world : plugin.getServer().getWorlds()) {
             HashMap<EntityType, Integer> count = new HashMap<>();
             List<Entity> entities = world.getEntities();
-            plugin.logger.info(String.format("世界 %s:", world.getName()));
+            int total = 0;
             for (Entity entity : entities) {
                 if (!count.containsKey(entity.getType())) {
-                    count.put(entity.getType(), 1);
-                } else {
-                    int current = count.get(entity.getType());
-                    count.put(entity.getType(), current + 1);
+                    count.put(entity.getType(), 0);
                 }
+                int current = count.get(entity.getType());
+                count.put(entity.getType(), current + 1);
+                total += 1;
             }
+            plugin.logger.info(String.format("世界 %s:[%d]", world.getName(), total));
             List<Map.Entry<EntityType, Integer>> sorted = sort(count);
             for (Map.Entry<EntityType, Integer> entry : sorted) {
                 plugin.logger.info(String.format("  - %s - %d", entry.getKey(), entry.getValue()));
