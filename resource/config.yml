@@ -9,5 +9,6 @@ modules:
   murder: true
   playerTwist: true
   flyTicket: true
+  fastRemove: true
 players: [ ]
 chest: ''

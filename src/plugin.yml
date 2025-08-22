@@ -76,3 +76,8 @@ commands:
   openfly:
     description: 切换是否开启飞行
     usage: /openfly
+  fr:
+    description: 快速清除建筑
+    usage: /fr <confirm|show|reset>
+    permission: meowutils.fastremove
+    permission-message: §c你没有权限

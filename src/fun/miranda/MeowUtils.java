@@ -2,6 +2,9 @@ package fun.miranda;
 
 import fun.miranda.CloudChest.CloudChest;
 import fun.miranda.CloudChest.CommandCloudChest;
+import fun.miranda.FastRemove.CommandFastRemove;
+import fun.miranda.FastRemove.EventBag;
+import fun.miranda.FastRemove.EventSelection;
 import fun.miranda.FlyTicket.CommandFlyTicket;
 import fun.miranda.FlyTicket.CommandOpenFly;
 import fun.miranda.FlyTicket.EventFlyTicket;
@@ -85,6 +88,9 @@ public class MeowUtils extends JavaPlugin {
         }
         if (getModuleEnabled("flyTicket")) {
             setupFlyticket();
+        }
+        if (getModuleEnabled("fastRemove")) {
+            setupFastRemove();
         }
     }
 
@@ -198,6 +204,13 @@ public class MeowUtils extends JavaPlugin {
         registerCommand("openfly", new CommandOpenFly());
         registerEvent(new EventFlyTicket());
         logger.info("§b[§6猫子组件§b] §e  -- 飞行券");
+    }
+
+    private void setupFastRemove() {
+        registerCommand("fr", new CommandFastRemove());
+        registerEvent(new EventSelection());
+        registerEvent(new EventBag());
+        logger.info("§b[§6猫子组件§b] §e  -- 快速清除建筑");
     }
 
 
